@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>Hello World Application</title>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+	<input type="file" id="myFiles" onchange='openFile(event)' multiple>
+  </body>
+  <script>
+	var openFile = function(event) {
+        var input = event.target;
+
+        var reader = new FileReader();
+        reader.onload = function(){
+          var text = reader.result;
+		  alert(text)
+          var node = document.getElementById('output');
+          node.innerText = text;
+          console.log(reader.result.substring(0, 200));
+        };
+        reader.readAsText(input.files[0]);
+      };
+  </script>
+</html>
