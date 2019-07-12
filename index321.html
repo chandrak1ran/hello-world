@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>Hello World Application</title>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+	<input type="file" id="myFiles" onchange='readMFiles(event)' multiple>
+  </body>
+  <script>
+	var readMFiles = function(event) {
+		if (window.File && window.FileReader && window.FileList && window.Blob) {
+			var files = event.target.files;
+			for (var i = 0; i < files.length; i++) { 
+				var file = files[i];
+				var reader = new FileReader();
+				reader.onload = function(e){
+					var text = reader.result;
+					alert(text);
+				}
+				reader.readAsText(file);
+			}
+		
+		} else { 
+			alert('File system not supported');	
+		}
+	};
+  
+  
+	var openFile = function(event) {
+        var input = event.target;
+		if (window.File && window.FileReader && window.FileList && window.Blob) {
+				var reader = new FileReader();
+				reader.onload = function(){
+				  var text = reader.result;
+				  alert(text)
+				  //var node = document.getElementById('output');
+				  //node.innerText = text;
+				  //console.log(reader.result.substring(0, 200));
+				};
+				reader.readAsText(input.files[0]);
+		} else {
+			alert('File system not supported');	
+		}	
+        
+      };
+	  var readmultifiles = function(e) {
+		  const files = e.currentTarget.files;
+		  Object.keys(files).forEach(i => {
+			const file = files[i];
+			const reader = new FileReader();
+			reader.onload = (e1) => {
+			   var text = reader.result;
+				  alert(text)
+				  //var node = document.getElementById('output');
+				  //node.innerText = text;
+				  //console.log(reader.result.substring(0, 200));
+			}
+			reader.readAsBinaryString(file);
+		  })
+		};
+  </script>
+</html>
